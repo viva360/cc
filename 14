@@ -1,0 +1,93 @@
+public class BST{
+static class Node{
+int val;
+Node left;
+Node right;
+Node(int val){
+this.val = val;
+}}
+public static Node insertIntoBST(Node root,int val){
+if(root==null) return new Node(val);
+if(root.val>val){
+if(root.left==null) root.left=new Node(val);
+else insertIntoBST(root.left,val);
+}
+else{
+if(root.right==null) root.right=new Node(val);
+else insertIntoBST(root.right,val);
+}
+return root;
+}
+public static Node deleteNode(Node root,int target){
+Node temp=new Node(Integer.MAX_VALUE);
+temp.left=root;
+delete(temp,target);
+return temp.left;
+}
+public static Node delete(Node root, int target){
+if(root==null) return null;
+if(root.val>target){
+if(root.left==null) return null;
+if(root.left.val==target){
+Node l=root.left;
+if(l.left==null && l.right==null) root.left=null;
+else if(l.left==null || l.right==null){
+if(l.left!=null) root.left=l.left;
+else root.left=l.right;
+}
+else{
+Node curr=l;
+Node pred=curr.left;
+while(pred.right!=null) pred=pred.right;
+delete(root,pred.val);
+pred.left=curr.left;
+pred.right=curr.right;
+root.left=pred;
+}
+}
+else delete(root.left,target);
+}
+else{
+if(root.right==null) return null;
+if(root.right.val==target){
+Node r=root.right;
+if(r.left==null && r.right==null) root.right=null;
+else if(r.left==null || r.right==null){
+if(r.left!=null) root.right=r.left;
+else root.right=r.right;
+}
+else{
+Node curr=r;
+Node pred=curr.left;
+while(pred.right!=null) pred=pred.right;
+delete(root,pred.val);
+pred.left=curr.left;
+pred.right=curr.right;
+root.right=pred;
+}
+}
+else delete(root.right,target);
+}
+return root;
+}
+public static void inorderTraversal(Node root){
+if(root!=null){
+inorderTraversal(root.left);
+System.out.print(root.val+" ");
+inorderTraversal(root.right);
+}
+}
+public static void main(String[] args){
+Node root = new Node(50);
+insertIntoBST(root,25);
+insertIntoBST(root,95);
+insertIntoBST(root,10);
+insertIntoBST(root,35);
+insertIntoBST(root,75);
+inorderTraversal(root);
+System.out.println();
+deleteNode(root,35);
+System.out.println("After deleting the Node :");
+inorderTraversal(root);
+}
+}
