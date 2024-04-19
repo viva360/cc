@@ -1,0 +1,58 @@
+import java.util.*;
+public class Boundary_Traversal{
+static ArrayList<Integer> arr;
+static class Node{
+int data;
+Node left;
+Node right;
+Node(int data){
+this.data = data;
+}}
+public static void boundaryTraversal(Node root){
+if(root==null) return;
+arr.add(root.data);
+leftBoundary(root.left);
+bottomBoundary(root);
+rightBoundary(root.right);
+}
+public static void leftBoundary(Node root){
+if(root==null) return;
+if(root.left != null){
+arr.add(root.data);
+leftBoundary(root.left);
+}
+else if(root.right != null){
+arr.add(root.data);
+leftBoundary(root.right);
+}
+}
+public static void bottomBoundary(Node root){
+if(root==null) return;
+bottomBoundary(root.left);
+if(root.left == null && root.right == null) arr.add(root.data);;
+bottomBoundary(root.right);
+}
+public static void rightBoundary(Node root){
+if(root==null) return;
+if(root.right != null){
+rightBoundary(root.right);
+arr.add(root.data);
+}
+else if(root.left != null){
+rightBoundary(root.left);
+arr.add(root.data);
+}
+}
+public static void main(String[] args){
+arr = new ArrayList<>();
+Node root = new Node(10);
+root.left = new Node(20);
+root.right = new Node(30);
+root.left.left = new Node(40);
+root.left.right = new Node(50);
+root.right.left = new Node(60);
+root.right.right = new Node(70);
+boundaryTraversal(root);
+System.out.println("Boundary Traversal : "+arr);
+}
+}
