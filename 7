@@ -1,0 +1,61 @@
+class MergeLinkedList{
+public static class Node{
+int val;
+Node next;
+Node(int val){
+this.val = val;
+}}
+public static void display(Node head){
+Node temp = head;
+while(temp!=null){
+System.out.print(temp.val+" ");
+temp = temp.next;
+}}
+public static Node mergeTwoLists(Node list1,Node list2){
+Node temp1 = list1;
+Node temp2 = list2;
+Node h = new Node(100);
+Node t = h;
+while(temp1!=null && temp2!=null){
+if(temp1.val<temp2.val){
+t.next = temp1;
+t = temp1;
+temp1 = temp1.next;
+}
+else{
+t.next = temp2;
+t = temp2;
+temp2 = temp2.next;
+}
+}
+if(temp1 == null){
+t.next = temp2;
+} else{
+t.next = temp1;
+}
+return h.next;
+}
+public static void main(String args[]){
+Node a = new Node(1);
+Node b = new Node(3);
+Node c = new Node(7);
+Node d = new Node(9);
+a.next = b;
+b.next = c;
+c.next = d;
+System.out.println("Linked List 01 :");
+display(a);
+System.out.println();
+Node x = new Node(2);
+Node y = new Node(5);
+Node z = new Node(10);
+x.next = y;
+y.next = z;
+System.out.println("Linked List 02 :");
+display(x);
+System.out.println();
+Node res = mergeTwoLists(a,x);
+System.out.println("New Linked List :");
+display(res);
+}
+}
