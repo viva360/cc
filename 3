@@ -1,0 +1,26 @@
+import java.util.Stack;
+import java.util.Scanner;
+public class NGE{
+public static void main(String[] args){
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter the size of the array ");
+int n = sc.nextInt();
+int arr[]=new int[n];
+System.out.println("Enter the elements ");
+for(int i=0;i<n;i++){
+arr[i]=sc.nextInt();
+}
+int res[]=new int[n];
+Stack<Integer> st=new Stack<>();
+for(int i=2*n-1;i>=0;i--){
+int place=i%n;
+while(st.size()>0 && st.peek()<=arr[place]){
+st.pop();
+}
+if(st.size()==0) res[place] = -1;
+else res[place] = st.peek();
+st.push(arr[place]);
+}
+for(int i=0;i<n;i++){
+System.out.print(res[i]+" ");
+}}}
