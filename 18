@@ -1,0 +1,29 @@
+import java.util.*;
+public class LeftView{
+static List<Integer> arr;
+static class Node{
+int data;
+Node left;
+Node right;
+Node(int data){
+this.data = data;
+}}
+public static List<Integer> leftSideView(Node root,int level){
+if(root==null) return null;
+if(arr.size()==level) arr.add(root.data);
+leftSideView(root.left,level+1);
+leftSideView(root.right,level+1);
+return arr;
+}
+public static void main(String[] args){
+Node root = new Node(10);
+root.left = new Node(20);
+root.right = new Node(30);
+root.left.left = new Node(40);
+root.left.right = new Node(50);
+root.right.left = new Node(60);
+root.right.right = new Node(70);
+arr = new ArrayList<>();
+System.out.println("Left Side View : "+leftSideView(root,0));
+}
+}
