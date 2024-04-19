@@ -1,0 +1,18 @@
+import java.util.*;
+public class Distinct_Substrings{
+public static Set<String> distinctSubstrings(String str){
+Set<String> res = new HashSet<String>();
+for(int i=0;i<=str.length();i++){
+for(int j=i+1;j<=str.length();j++){
+res.add(str.substring(i, j));
+}
+}
+return res;
+}
+public static void main(String args[]){
+Scanner sc = new Scanner(System.in);
+System.out.println("Enter the string: ");
+String str = sc.next();
+System.out.println(distinctSubstrings(str));
+}
+}
