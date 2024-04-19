@@ -1,4 +1,4 @@
-package STACKS;
+
 import java.util.*;
 class MinStack{
 static class Stacks{
@@ -31,7 +31,7 @@ public void display(){
 System.out.print("Stack: ");
 System.out.println(st);
 }
-}
+
 public static void main(String args[]){
 Stacks stack = new Stacks();
 stack.push(2);
@@ -43,5 +43,6 @@ stack.display();
 System.out.println("Minimum Element : "+stack.getMin());
 stack.pop();
 System.out.println("New Minimum Element after popping : " +stack.getMin());
+}
 }
 }
