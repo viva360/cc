@@ -1,0 +1,37 @@
+public class LCA{
+static class Node{
+int data;
+Node left;
+Node right;
+Node(int data){
+this.data = data;
+}}
+public static boolean contains(Node root,Node node){
+if(root==null) return false;
+if(root==node) return true;
+return contains(root.left,node) || contains(root.right,node);
+}
+public static Node lowestCommonAncestor(Node root,Node p,Node q) {
+if(p==root || q==root) return root;
+if(p==q) return p;
+boolean leftp = contains(root.left,p);
+boolean rightq = contains(root.right,q);
+if(leftp==true && rightq==true) return root;
+if(leftp==true && rightq==false) return lowestCommonAncestor(root.left,p,q);
+if(leftp==false && rightq==true) return lowestCommonAncestor(root.right,p,q);
+if(leftp==false && rightq==false) return root;
+return root;
+}
+public static void main(String[] args){
+Node root = new Node(10);
+root.left = new Node(20);
+root.right = new Node(30);
+root.left.left = new Node(40);
+root.left.right = new Node(50);
+root.right.left = new Node(60);
+root.right.right = new Node(70);
+System.out.println("Lowest Common Ancestor: ");
+Node res = lowestCommonAncestor(root,root.left.left,root.left.right);
+System.out.println(res.data);
+}
+}
