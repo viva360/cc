@@ -1,0 +1,35 @@
+import java.util.*;
+class Shunting_Yard{
+public static void main(String[] args){
+String str="9-5+3*4/6";
+Queue<Character> queue = new LinkedList<>();
+Stack<Character> op = new Stack<>();
+Map<Character,Integer> mp = new HashMap<>();
+mp.put('+',1);
+mp.put('-',1);
+mp.put('*',2);
+mp.put('/',2);
+for(int i=0;i<str.length();i++){
+char ch=str.charAt(i);
+int ascii=(int)ch;
+if(ascii>=48 && ascii<=57){
+queue.add(ch);
+}
+else{
+if(op.size()==0 || mp.get(op.peek())>mp.get(ch)){
+op.push(ch);
+}
+else{
+while(op.size()>0 && mp.get(op.peek())<=mp.get(ch)){
+queue.add(op.pop());
+}
+op.push(ch);
+}
+}
+}
+while(op.size()>0){
+queue.add(op.pop());
+}
+System.out.println(queue);
+}
+}
