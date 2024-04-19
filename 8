@@ -1,0 +1,39 @@
+class MergePoint{
+public static class Node{
+int val;
+Node next;
+Node(int val){
+this.val = val;
+}}
+public static Node mergePoint(Node list1,Node list2){
+Node temp1 = list1;
+Node temp2 = list2;
+while(temp1.val != temp2.val){
+if(temp1.val == temp2.val) return temp1;
+if(temp1.next == null) temp1=list2;
+else temp1=temp1.next;
+if(temp2.next == null) temp2=list1;
+else temp2=temp2.next;
+}
+return temp1;
+}
+public static void main(String args[]){
+Node a = new Node(1);
+Node b = new Node(3);
+Node c = new Node(5);
+Node d = new Node(7);
+Node e = new Node(9);
+Node f = new Node(10);
+Node x = new Node(2);
+Node y = new Node(4);
+a.next = b;
+b.next = c;
+c.next = d;
+d.next = e;
+e.next = f;
+x.next = y;
+y.next = d;
+Node res = mergePoint(a,x);
+System.out.println("Merge Point : "+res.val);
+}
+}
